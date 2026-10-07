@@ -1,6 +1,15 @@
+import { router } from 'expo-router'; // usado para trocar de tela
 import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { useTeste } from '../contexto/TesteContext'; // respostas compartilhadas entre as telas
 
 export default function HomeScreen() {
+  const { reiniciar } = useTeste(); // função que apaga respostas de um teste anterior
+
+  function comecar() {
+    reiniciar(); // garante que o teste começa do zero
+    router.push('/teste'); // abre a tela de perguntas
+  }
+
   return (
     <View style={styles.container}>
 
@@ -18,7 +27,7 @@ export default function HomeScreen() {
         habilidades, gostos e disponibilidade.
       </Text>
 
-      <Pressable style={styles.botao}>
+      <Pressable style={styles.botao} onPress={comecar /* ao tocar, começa o teste */}>
         <Text style={styles.textoBotao}>
           Começar
         </Text>
