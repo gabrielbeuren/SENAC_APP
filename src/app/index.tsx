@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-=======
 import { router } from 'expo-router'; // usado para trocar de tela
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useTeste } from '../contexto/TesteContext'; // respostas compartilhadas entre as telas
->>>>>>> 1cabdc39f9ed78b57eb6fbf6a1bfe673c347f817
 
 export default function HomeScreen() {
   const { reiniciar } = useTeste(); // função que apaga respostas de um teste anterior
@@ -61,7 +57,7 @@ const styles = StyleSheet.create({
   subtitulo: {
     fontSize: 20,
     textAlign: 'center',
-    color: '#ffffff',
+    color: '#238ef8',
     marginBottom: 25,
     fontWeight: 'bold',
   },
@@ -72,7 +68,6 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     lineHeight: 24,
     marginBottom: 35,
-    
 
   },
 
