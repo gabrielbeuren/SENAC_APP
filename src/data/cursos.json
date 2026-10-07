@@ -1,0 +1,363 @@
+[
+  {
+    "id": "barbeiro",
+    "nome": "Barbeiro",
+    "area": "beleza",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/barbeiro/9e4165ed-bdfd-47e6-8c9e-50af97cec0e5/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "cabeleireiro",
+    "nome": "Cabeleireiro",
+    "area": "beleza",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/cabeleireiro/2fb372d2-d5dd-4243-a02a-69b51dbcd483/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "sobrancelhas-cilios",
+    "nome": "Design de Sobrancelhas e Extensão de Cílios",
+    "area": "beleza",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/design-de-sobrancelhas-e-extensao-de-cilios/ca51c6ce-ac92-465e-9a85-cbb5b587f4fc/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "extensao-cilios",
+    "nome": "Extensão de Cílios",
+    "area": "beleza",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/extensao-de-cilios/edaef463-3b6c-41b0-8b64-23fd1a76afa3/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "brow-lamination",
+    "nome": "Brow Lamination",
+    "area": "beleza",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/brow-lamination/7944a051-22e7-48cb-86e8-ff31e06454db/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "skincare",
+    "nome": "Técnicas de Cuidados de Pele e Skincare",
+    "area": "beleza",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/tecnicas-de-cuidados-de-pele-e-skincare/b6e7deca-c25f-41a4-a6d1-5ef15ab7235c/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "depilacao",
+    "nome": "Técnicas de Depilação Facial e Corporal",
+    "area": "beleza",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/tecnicas-de-depilacao-facial-e-corporal/01769854-9298-42da-94d3-8468f3b7291e/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "manicure",
+    "nome": "Técnicas de Manicure, Pedicure e Bem-Estar",
+    "area": "beleza",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/tecnicas-de-manicure-pedicure-e-bem-estar/429da807-3ae9-4759-88cb-78e64cbcc795/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "terapias-capilares",
+    "nome": "Terapias Capilares para Cabeleireiros",
+    "area": "beleza",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/terapias-capilares-para-cabeleireiros/aef29a2b-e385-4061-8e0f-afe00c47ff30/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "massagista",
+    "nome": "Massagista",
+    "area": "saude",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/massagista/60b09394-e039-4fad-86bc-461b4b33f221/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "tec-optica",
+    "nome": "Técnico em Óptica",
+    "area": "saude",
+    "nivel": "tecnico",
+    "modalidades": [
+      "ead"
+    ],
+    "link": "https://www.ead.senac.br/cursos-tecnicos/tecnico-em-optica/"
+  },
+  {
+    "id": "marketing-digital",
+    "nome": "Analista de Marketing Digital em Mídias Sociais",
+    "area": "comercio",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/analista-de-marketing-digital-em-midias-sociais/7af2fc51-27c2-4310-bddd-6397d99c31f0/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "trafego-pago",
+    "nome": "Gestão de Tráfego Pago",
+    "area": "comercio",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/gestao-de-trafego-pago/b5093344-f2a2-448a-8922-87cc03f2a8f8/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "vendedores",
+    "nome": "Formação de Vendedores de Alto Desempenho",
+    "area": "comercio",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/formacao-de-vendedores-de-alto-desempenho/2a48193b-5a81-4a5c-8964-3dcd43ce5dd3/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "tec-imobiliarias",
+    "nome": "Técnico em Transações Imobiliárias",
+    "area": "comercio",
+    "nivel": "tecnico",
+    "modalidades": [
+      "ead"
+    ],
+    "link": "https://www.ead.senac.br/cursos-tecnicos/tecnico-em-transacoes-imobiliarias/"
+  },
+  {
+    "id": "gerentes",
+    "nome": "Formação de Gerentes e Supervisores",
+    "area": "gestao",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/formacao-gerentes-e-supervisores/703f4b16-dae2-4cbc-a07a-434c82dc96a1/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "assistente-adm",
+    "nome": "Assistente Administrativo",
+    "area": "gestao",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/escola/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "tec-administracao",
+    "nome": "Técnico em Administração",
+    "area": "gestao",
+    "nivel": "tecnico",
+    "modalidades": [
+      "ead"
+    ],
+    "link": "https://www.ead.senac.br/cursos-tecnicos/tecnico-em-administracao/"
+  },
+  {
+    "id": "tec-contabilidade",
+    "nome": "Técnico em Contabilidade",
+    "area": "gestao",
+    "nivel": "tecnico",
+    "modalidades": [
+      "ead"
+    ],
+    "link": "https://www.ead.senac.br/cursos-tecnicos/tecnico-em-contabilidade/"
+  },
+  {
+    "id": "tec-logistica",
+    "nome": "Técnico em Logística",
+    "area": "gestao",
+    "nivel": "tecnico",
+    "modalidades": [
+      "ead"
+    ],
+    "link": "https://www.ead.senac.br/cursos-tecnicos/tecnico-em-logistica/"
+  },
+  {
+    "id": "tec-rh",
+    "nome": "Técnico em Recursos Humanos",
+    "area": "gestao",
+    "nivel": "tecnico",
+    "modalidades": [
+      "ead"
+    ],
+    "link": "https://www.ead.senac.br/cursos-tecnicos/tecnico-em-recursos-humanos/"
+  },
+  {
+    "id": "tec-secretariado",
+    "nome": "Técnico em Secretariado",
+    "area": "gestao",
+    "nivel": "tecnico",
+    "modalidades": [
+      "ead"
+    ],
+    "link": "https://www.senacrs.com.br/cursosTecnicos/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "tec-qualidade",
+    "nome": "Técnico em Qualidade",
+    "area": "gestao",
+    "nivel": "tecnico",
+    "modalidades": [
+      "ead"
+    ],
+    "link": "https://www.senacrs.com.br/cursosTecnicos/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "oratoria",
+    "nome": "Dicção, Desinibição e Oratória",
+    "area": "comunicacao",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/diccao-desinibicao-e-oratoria/3dd555bb-690e-44ef-a642-71e181c9fcf8/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "fotografia",
+    "nome": "Fotografia Digital com Photoshop",
+    "area": "comunicacao",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/fotografia-digital-com-photoshop/0838f8cd-673d-4755-8c3e-229913234c6f/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "design-grafico",
+    "nome": "Ferramentas de Design Gráfico",
+    "area": "design",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/ferramentas-de-design-grafico/badd6c9c-612f-452a-8436-6e047bbf23c0/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "tec-interiores",
+    "nome": "Técnico em Design de Interiores",
+    "area": "design",
+    "nivel": "tecnico",
+    "modalidades": [
+      "ead"
+    ],
+    "link": "https://www.ead.senac.br/cursos-tecnicos/tecnico-em-design-de-interiores/"
+  },
+  {
+    "id": "excel",
+    "nome": "Excel",
+    "area": "ti",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/cursounificado/excel/12f4015e-9aa8-45fd-bd0c-6096eefdedea/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "informatica-fundamental",
+    "nome": "Informática Fundamental Office e Mobile",
+    "area": "ti",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/informatica-fundamental-office-e-mobile/fa250fbc-5986-4349-8b75-3b8443cf4390/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "megateens",
+    "nome": "Informática Megateens",
+    "area": "ti",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/informatica-megateens/94ab4348-97f6-4c8d-8ddb-8706ab37d36c/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "drones",
+    "nome": "Pilotagem de Drones com Filmagens e Fotografias Aéreas",
+    "area": "ti",
+    "nivel": "livre",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/curso/pilotagem-de-drones-com-filmagens-e-fotografias-aereas/905639b6-e97d-4375-8139-68d58713bdfd/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "tec-sistemas",
+    "nome": "Técnico em Desenvolvimento de Sistemas",
+    "area": "ti",
+    "nivel": "tecnico",
+    "modalidades": [
+      "presencial",
+      "ead"
+    ],
+    "link": "https://www.senacrs.com.br/curso/tecnico-em-desenvolvimento-de-sistemas/3aa53687-6470-43cf-af8f-a0661a9e8e4f/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "tec-meio-ambiente",
+    "nome": "Técnico em Meio Ambiente",
+    "area": "ambiente",
+    "nivel": "tecnico",
+    "modalidades": [
+      "ead"
+    ],
+    "link": "https://www.ead.senac.br/cursos-tecnicos/tecnico-em-meio-ambiente/"
+  },
+  {
+    "id": "tec-seguranca",
+    "nome": "Técnico em Segurança do Trabalho",
+    "area": "ambiente",
+    "nivel": "tecnico",
+    "modalidades": [
+      "ead"
+    ],
+    "link": "https://www.senacrs.com.br/cursosTecnicos/5dc71a36-09b4-4e3a-8e9e-d39b43e39090"
+  },
+  {
+    "id": "esp-seguranca-ambiente",
+    "nome": "Especialização Técnica em Segurança do Trabalho em Meio Ambiente",
+    "area": "ambiente",
+    "nivel": "tecnico",
+    "modalidades": [
+      "ead"
+    ],
+    "link": "https://www.ead.senac.br/cursos-tecnicos/especializacao-tecnica-em-seguranca-do-trabalho-em-meio-ambiente/"
+  },
+  {
+    "id": "ingles",
+    "nome": "Inglês",
+    "area": "idiomas",
+    "nivel": "idioma",
+    "modalidades": [
+      "presencial"
+    ],
+    "link": "https://www.senacrs.com.br/cursosIdiomas"
+  }
+]
