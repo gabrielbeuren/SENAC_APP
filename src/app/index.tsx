@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 export default function HomeScreen() {
   return (
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   subtitulo: {
     fontSize: 20,
     textAlign: 'center',
-    color: '#238ef8',
+    color: '#ffffff',
     marginBottom: 25,
     fontWeight: 'bold',
   },
@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     lineHeight: 24,
     marginBottom: 35,
+    
 
   },
 
