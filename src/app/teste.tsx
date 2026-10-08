@@ -10,7 +10,6 @@ import { ESCALA, PERGUNTAS } from '../data/perguntas'; // perguntas e textos da 
 export default function TelaTeste() {
   const { respostas, responder } = useTeste(); // respostas já dadas e função para gravar
   const [indice, setIndice] = useState(0); // posição da pergunta atual (0 = primeira)
-  const [terminou, setTerminou] = useState(false); // true depois da última pergunta
 
   const pergunta = PERGUNTAS[indice]; // pergunta mostrada agora
   const notaAtual = respostas[pergunta.id]; // nota já dada nesta pergunta (ou undefined)
@@ -18,7 +17,7 @@ export default function TelaTeste() {
   const progresso = ((indice + 1) / PERGUNTAS.length) * 100; // percentual da barra de progresso
 
   function avancar() {
-    if (ehUltima) setTerminou(true); // acabou: mostra o aviso de conclusão
+    if (ehUltima) router.push('/filtros'); // acabou: vai para o filtro de realidade
     else setIndice((i) => i + 1); // senão: próxima pergunta
   }
 
@@ -30,22 +29,6 @@ export default function TelaTeste() {
   function voltar() {
     if (indice === 0) router.back(); // na primeira pergunta, volta para a tela inicial
     else setIndice((i) => i - 1); // senão, volta uma pergunta
-  }
-
-  // ---------- TELA DE CONCLUSÃO (provisória) ----------
-  // TODO: quando a tela de filtros existir, trocar este bloco por router.push('/filtros').
-  if (terminou) {
-    return (
-      <View style={styles.fim}>
-        <Text style={styles.fimTitulo}>Pronto!</Text>
-        <Text style={styles.fimTexto}>
-          Você respondeu {Object.keys(respostas).length} de {PERGUNTAS.length} perguntas. A próxima etapa vai perguntar
-          sobre a sua rotina.
-        </Text>
-        <Botao texto="Revisar respostas" variante="contorno" onPress={() => setTerminou(false)} />
-        <Botao texto="Voltar ao início" onPress={() => router.back()} />
-      </View>
-    );
   }
 
   // ---------- TELA DA PERGUNTA ----------
@@ -97,7 +80,4 @@ const styles = StyleSheet.create({
   pergunta: { fontSize: 23, fontWeight: 'bold', color: CORES.texto, lineHeight: 31 }, // texto da pergunta
   opcoes: { gap: 10 }, // espaço entre as opções
   rodape: { flexDirection: 'row', justifyContent: 'space-between', gap: 12 }, // botões Voltar e Avançar
-  fim: { flex: 1, backgroundColor: CORES.fundo, padding: 24, gap: 16, justifyContent: 'center' }, // tela de conclusão
-  fimTitulo: { fontSize: 32, fontWeight: 'bold', color: CORES.laranja, textAlign: 'center' }, // "Pronto!"
-  fimTexto: { fontSize: 17, color: CORES.texto, textAlign: 'center', lineHeight: 25, marginBottom: 12 }, // explicação
 });

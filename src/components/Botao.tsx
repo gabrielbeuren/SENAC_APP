@@ -5,7 +5,7 @@ import { CORES } from '../constants/tema'; // cores do app
 type Props = {
   texto: string; // texto escrito no botão
   onPress: () => void; // função chamada ao tocar
-  variante?: 'principal' | 'contorno'; // principal = azul cheio (padrão); contorno = só a borda
+  variante?: 'principal' | 'contorno' | 'whatsapp'; // principal = azul cheio (padrão); contorno = só a borda; whatsapp = verde
 };
 
 export function Botao({ texto, onPress, variante = 'principal' }: Props) {
@@ -14,8 +14,8 @@ export function Botao({ texto, onPress, variante = 'principal' }: Props) {
       onPress={onPress} // ação do toque
       accessibilityRole="button" // leitores de tela anunciam como "botão"
       style={({ pressed }) => [
-        styles.base, // estilo comum aos dois tipos
-        variante === 'principal' ? styles.principal : styles.contorno, // cor conforme a variante
+        styles.base, // estilo comum a todos os tipos
+        styles[variante], // cor conforme a variante (o nome da variante é o nome do estilo)
         pressed && styles.pressionado, // fica mais transparente enquanto o dedo está em cima
       ]}
     >
@@ -27,12 +27,13 @@ export function Botao({ texto, onPress, variante = 'principal' }: Props) {
 const styles = StyleSheet.create({
   base: {
     paddingVertical: 15, // espaço em cima e embaixo (igual ao botão "Começar")
-    paddingHorizontal: 28, // espaço nas laterais
+    paddingHorizontal: 20, // espaço nas laterais
     borderRadius: 8, // cantos arredondados (igual ao botão "Começar")
     alignItems: 'center', // centraliza o texto
   },
   principal: { backgroundColor: CORES.botao }, // azul cheio
   contorno: { borderWidth: 1.5, borderColor: CORES.borda }, // só a borda, fundo transparente
+  whatsapp: { backgroundColor: CORES.whatsapp }, // verde do WhatsApp
   pressionado: { opacity: 0.8 }, // efeito visual do toque
-  texto: { color: CORES.texto, fontSize: 17, fontWeight: 'bold' }, // texto branco em negrito
+  texto: { color: CORES.texto, fontSize: 16, fontWeight: 'bold' }, // texto branco em negrito
 });

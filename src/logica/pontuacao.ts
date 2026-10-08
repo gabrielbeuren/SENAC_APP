@@ -58,25 +58,24 @@ export function filtrarCursos(cursos: Curso[], area: AreaId, filtros: Filtros): 
   });
 }
 
+// ---------------------------------------------------------------------------
 // 4) RECOMENDAR CURSOS DAS DUAS ÁREAS COM MAIOR PONTUAÇÃO
-export function recomendarCursos(
-  cursos: Curso[],
-  respostas: Respostas
-) {
-  // Calcula a pontuação de cada área
-  const resultados = calcularPercentuais(respostas);
+// Junta tudo para a tela de resultado: percentuais, as 2 áreas mais fortes
+// e, para cada uma, só os cursos que passam no filtro de realidade.
+// ---------------------------------------------------------------------------
+export function recomendarCursos(cursos: Curso[], respostas: Respostas, filtros: Filtros) {
+  const resultados = calcularPercentuais(respostas); // percentual de cada área, do maior para o menor
+  const areas = areasRecomendadas(resultados, 2); // ids das 2 áreas mais fortes
 
-  // Identifica as duas áreas mais bem pontuadas
-  const areas = areasRecomendadas(resultados, 2);
-
-  // Busca os cursos pertencentes às duas áreas
-  const cursosRecomendados = cursos.filter((curso) =>
-    areas.includes(curso.area)
-  );
+  // Para cada área recomendada, guarda só os cursos que cabem na rotina da pessoa
+  const cursosPorArea = areas.map((areaId) => ({
+    areaId, // qual área é (ex.: 'ti')
+    cursos: filtrarCursos(cursos, areaId, filtros), // aplica presencial/EAD e curto/técnico
+  }));
 
   return {
-    resultados,
-    areas,
-    cursos: cursosRecomendados,
+    resultados, // usado no gráfico de percentuais
+    areas, // ids das áreas recomendadas
+    cursosPorArea, // cursos separados por área, já filtrados
   };
 }

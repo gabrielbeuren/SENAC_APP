@@ -6,6 +6,7 @@ export const CORES = {
   laranja: '#ffa600', // laranja do título "SENAC CURSOS" e dos destaques
   azulClaro: '#238ef8', // azul claro do subtítulo
   botao: '#0054a6', // azul do botão "Começar"
+  whatsapp: '#1f9d55', // verde do botão de WhatsApp (tela de resultado)
   texto: '#ffffff', // texto principal (branco)
   textoSuave: '#b8c4ee', // texto secundário (branco azulado, menos chamativo)
   cartao: 'rgba(255, 255, 255, 0.08)', // fundo dos cartões: branco quase transparente
