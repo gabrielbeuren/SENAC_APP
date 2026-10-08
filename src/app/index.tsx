@@ -27,6 +27,8 @@ export default function HomeScreen() {
         habilidades, gostos e disponibilidade.
       </Text>
 
+    
+
       <Pressable style={styles.botao} onPress={comecar /* ao tocar, começa o teste */}>
         <Text style={styles.textoBotao}>
           Começar
