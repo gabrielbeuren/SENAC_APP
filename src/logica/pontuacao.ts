@@ -57,3 +57,26 @@ export function filtrarCursos(cursos: Curso[], area: AreaId, filtros: Filtros): 
     return true; // passou em todos os filtros
   });
 }
+
+// 4) RECOMENDAR CURSOS DAS DUAS ÁREAS COM MAIOR PONTUAÇÃO
+export function recomendarCursos(
+  cursos: Curso[],
+  respostas: Respostas
+) {
+  // Calcula a pontuação de cada área
+  const resultados = calcularPercentuais(respostas);
+
+  // Identifica as duas áreas mais bem pontuadas
+  const areas = areasRecomendadas(resultados, 2);
+
+  // Busca os cursos pertencentes às duas áreas
+  const cursosRecomendados = cursos.filter((curso) =>
+    areas.includes(curso.area)
+  );
+
+  return {
+    resultados,
+    areas,
+    cursos: cursosRecomendados,
+  };
+}
