@@ -1,118 +1,162 @@
-import { router } from 'expo-router';
-import { Image, ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
-import { useTeste } from '../contexto/TesteContext';
+import { LinearGradient } from 'expo-linear-gradient'; // degradê: a foto vai escurecendo até o rodapé
+import { router } from 'expo-router'; // troca de tela
+import { Image, ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native'; // componentes básicos
+import { useSafeAreaInsets } from 'react-native-safe-area-context'; // espaço da barra do relógio e dos botões do celular
+import { useTeste } from '../contexto/TesteContext'; // respostas compartilhadas entre as telas
+
+// Pequenas etiquetas que mostram, de cara, que o teste é rápido e fácil.
+const ETIQUETAS = ['18 perguntas', '3 minutos', 'Sem cadastro'];
 
 export default function HomeScreen() {
-  const { reiniciar } = useTeste();
+  const { reiniciar } = useTeste(); // apaga respostas de um teste anterior
+  const margens = useSafeAreaInsets(); // altura da barra de cima (relógio) e de baixo (botões do Android)
 
   function comecar() {
-    reiniciar();
-    router.push('/teste');
+    reiniciar(); // garante que o teste começa do zero
+    router.push('/teste'); // abre a tela de perguntas
   }
 
   return (
     <ImageBackground
-      source={require('../../assets/images/estudante.png')}
-      style={styles.container}
-      resizeMode="cover"
+      source={require('../../assets/images/estudante.png')} // foto da estudante (do Gabriel)
+      style={styles.container} // ocupa a tela toda
+      resizeMode="cover" // preenche a tela sem deformar
     >
-      {/* Overlay escuro para garantir o contraste */}
-      <View style={styles.overlay}>
-        
-        {/* Bloco do Logo, Texto CURSOS e Subtítulo no topo */}
-        <View style={styles.headerContent}>
-          <Image 
-            source={require('../../assets/images/senac.png')} 
-            style={styles.logoImage} 
-            resizeMode="contain" 
+      {/* Degradê por cima da foto: escuro em cima (para o logo), transparente no meio (rosto) e azul sólido embaixo (texto) */}
+      <LinearGradient
+        colors={['rgba(1,10,102,0.55)', 'rgba(1,10,102,0)', 'rgba(1,10,102,0)', 'rgba(1,10,102,0.92)', '#010a66']}
+        locations={[0, 0.2, 0.42, 0.66, 1]} // onde cada cor começa (0 = topo, 1 = rodapé)
+        style={[styles.degrade, { paddingTop: margens.top + 12, paddingBottom: margens.bottom + 24 }]}
+      >
+        {/* ---------- TOPO: logo branco e etiqueta da unidade ---------- */}
+        <View style={styles.topo}>
+          <Image
+            source={require('../../assets/images/senac-logo-branco.png')} // logo do Senac em branco (recortado, 800 px)
+            style={styles.logo} // tamanho do logo
+            resizeMode="contain" // mostra o logo inteiro
+            accessibilityLabel="Senac" // leitor de tela
           />
-          <Text style={styles.textoCursos}>CURSOS</Text>
-          <Text style={styles.subtitulo}>Destrave seu futuro</Text>
+          <Text style={styles.unidade}>Taquara · RS</Text>
         </View>
 
-        {/* Card inferior com a descrição e o botão */}
-        <View style={styles.cardContent}>
+        {/* ---------- RODAPÉ: nome, título, texto, etiquetas e botão ---------- */}
+        <View style={styles.rodape}>
+          <Text style={styles.marca}>SENAC CURSOS</Text>
+          <Text style={styles.titulo}>Destrave seu futuro</Text>
           <Text style={styles.descricao}>
-            O Senac Cursos App é um guia para te ajudar a escolher dentre as inúmeras opções de cursos oferecidos pelo Senac qual opção se adequa mais a você, oferecendo um teste vocacional que filtra opções de acordo com suas habilidades, gostos e disponibilidade.
+            Responda perguntas rápidas e descubra quais cursos do Senac combinam com seus gostos, suas habilidades e a
+            sua rotina.
           </Text>
 
-          <Pressable style={styles.botao} onPress={comecar}>
-            <Text style={styles.textoBotao}>Começar</Text>
+          <View style={styles.etiquetas /* etiquetas lado a lado */}>
+            {ETIQUETAS.map((texto) => ( // uma pílula para cada etiqueta
+              <Text key={texto} style={styles.etiqueta}>
+                {texto}
+              </Text>
+            ))}
+          </View>
+
+          <Pressable
+            style={({ pressed }) => [styles.botao, pressed && styles.botaoPressionado]} // escurece ao tocar
+            onPress={comecar} // começa o teste
+            accessibilityRole="button" // leitor de tela anuncia como botão
+          >
+            <Text style={styles.textoBotao}>Começar o teste  →</Text>
           </Pressable>
         </View>
-
-      </View>
+      </LinearGradient>
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#010a66',
+    flex: 1, // ocupa a tela toda
+    backgroundColor: '#010a66', // azul de fundo enquanto a foto carrega
   },
-  overlay: {
-    flex: 1,
-    backgroundColor: 'rgba(2, 6, 32, 0.78)',
-    justifyContent: 'space-between',
-    paddingHorizontal: 24,
-    paddingTop: 10, // Reduzido drasticamente para colar bem no topo
-    paddingBottom: 40,
+  degrade: {
+    flex: 1, // cobre a foto inteira
+    justifyContent: 'space-between', // topo em cima, rodapé embaixo
+    paddingHorizontal: 24, // espaço nas laterais
   },
-  headerContent: {
-    alignItems: 'center',
-    marginTop: 0, // Removido qualquer espaço extra do topo
+  topo: {
+    flexDirection: 'row', // logo e etiqueta lado a lado
+    alignItems: 'center', // alinhados pelo meio
+    justifyContent: 'space-between', // logo na esquerda, etiqueta na direita
   },
-  logoImage: {
-    width: 600,  // Mantido o tamanho imponente que você pediu
-    height: 250, // Mantida a proporção exata
-    marginBottom: -15, // Puxa o texto "CURSOS" levemente para perto da logo se necessário
+  logo: {
+    width: 104, // logo pequeno: identifica sem cobrir a foto
+    height: 104 * (469 / 800), // altura proporcional ao arquivo (800 x 469)
   },
-  textoCursos: {
-    fontSize: 22,    // Um pouco menor que o logo, criando hierarquia
-    fontWeight: '800',
-    color: '#ffb703', // Amarelo característico do Senac
-    letterSpacing: 3,
-    marginBottom: 6,
+  unidade: {
+    color: '#ffffff', // texto branco
+    fontSize: 13, // pequeno
+    fontWeight: '700',
+    paddingHorizontal: 12, // espaço nas laterais da pílula
+    paddingVertical: 6, // espaço em cima e embaixo
+    borderRadius: 999, // formato de pílula
+    borderWidth: 1, // contorno
+    borderColor: 'rgba(255,255,255,0.5)', // contorno branco transparente
+    overflow: 'hidden', // necessário no iOS para o arredondamento
   },
-  subtitulo: {
-    fontSize: 16,
-    textAlign: 'center',
-    color: '#38bdf8',
-    fontWeight: '600',
-    letterSpacing: 0.5,
+  rodape: {
+    gap: 10, // espaço entre os itens do rodapé
   },
-  cardContent: {
-    backgroundColor: 'rgba(255, 255, 255, 0.08)',
-    borderRadius: 20,
-    padding: 22,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.15)',
-    alignItems: 'center',
+  marca: {
+    color: '#f7941d', // laranja oficial do Senac
+    fontSize: 14,
+    fontWeight: '900',
+    letterSpacing: 3, // letras afastadas, estilo "etiqueta"
+    textShadowColor: 'rgba(1,10,102,0.9)', // sombra azul-escura: o texto continua legível em cima da foto (celular pequeno)
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 8,
+  },
+  titulo: {
+    color: '#ffffff', // branco
+    fontSize: 34, // título grande
+    fontWeight: '900',
+    lineHeight: 40,
+    textShadowColor: 'rgba(1,10,102,0.9)', // sombra azul-escura: o texto continua legível em cima da foto (celular pequeno)
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 8,
   },
   descricao: {
-    fontSize: 14,
-    textAlign: 'center',
-    color: '#f1f5f9',
-    lineHeight: 22,
-    marginBottom: 24,
+    color: '#d6def5', // branco azulado, menos chamativo que o título
+    fontSize: 16,
+    lineHeight: 23,
+    textShadowColor: 'rgba(1,10,102,0.9)', // sombra azul-escura: o texto continua legível em cima da foto (celular pequeno)
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 8,
+  },
+  etiquetas: {
+    flexDirection: 'row', // lado a lado
+    flexWrap: 'wrap', // quebra linha se não couber
+    gap: 8, // espaço entre as etiquetas
+    marginTop: 4,
+    marginBottom: 10,
+  },
+  etiqueta: {
+    color: '#ffffff',
+    fontSize: 13,
+    fontWeight: '600',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 999, // pílula
+    backgroundColor: 'rgba(255,255,255,0.12)', // fundo branco quase transparente
+    overflow: 'hidden',
   },
   botao: {
-    backgroundColor: '#0284c7',
-    paddingVertical: 16,
-    width: '100%',
-    borderRadius: 12,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-    elevation: 8,
+    backgroundColor: '#f7941d', // laranja Senac: o botão é o que mais chama atenção
+    paddingVertical: 17,
+    borderRadius: 14,
+    alignItems: 'center', // texto centralizado
+  },
+  botaoPressionado: {
+    backgroundColor: '#d97c0c', // laranja mais escuro enquanto o dedo está em cima
   },
   textoBotao: {
     color: '#ffffff',
-    fontSize: 16,
-    fontWeight: 'bold',
-    letterSpacing: 0.5,
+    fontSize: 18,
+    fontWeight: '800',
   },
 });
