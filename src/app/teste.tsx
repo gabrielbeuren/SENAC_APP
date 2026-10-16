@@ -1,6 +1,7 @@
 import { router } from 'expo-router'; // troca de tela
 import { useState } from 'react'; // estado local da tela
 import { ScrollView, StyleSheet, Text, View } from 'react-native'; // componentes básicos
+import { useSafeAreaInsets } from 'react-native-safe-area-context'; // mede as barras do sistema deste aparelho
 import { Botao } from '../components/Botao'; // nosso botão
 import { Opcao } from '../components/Opcao'; // opção marcável
 import { CORES } from '../constants/tema'; // cores do app
@@ -10,6 +11,7 @@ import { ESCALA, PERGUNTAS } from '../data/perguntas'; // perguntas e textos da 
 export default function TelaTeste() {
   const { respostas, responder } = useTeste(); // respostas já dadas e função para gravar
   const [indice, setIndice] = useState(0); // posição da pergunta atual (0 = primeira)
+  const insets = useSafeAreaInsets(); // insets.bottom = altura da barra de navegação deste celular
 
   const pergunta = PERGUNTAS[indice]; // pergunta mostrada agora
   const notaAtual = respostas[pergunta.id]; // nota já dada nesta pergunta (ou undefined)
@@ -33,7 +35,9 @@ export default function TelaTeste() {
 
   // ---------- TELA DA PERGUNTA ----------
   return (
-    <ScrollView style={styles.tela} contentContainerStyle={styles.conteudo}>
+    // paddingBottom somado ao inset: numa pergunta longa o conteúdo rola, e sem isso
+    // os botões Voltar/Avançar terminam atrás da barra de navegação do Android.
+    <ScrollView style={styles.tela} contentContainerStyle={[styles.conteudo, { paddingBottom: insets.bottom + 24 }]}>
       <View style={styles.progressoBloco}>
         <Text style={styles.progressoTexto}>
           Pergunta {indice + 1} de {PERGUNTAS.length}

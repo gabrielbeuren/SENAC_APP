@@ -1,5 +1,6 @@
 import { router, Stack } from 'expo-router'; // navegação; Stack.Screen define o título desta tela
 import { Linking, ScrollView, StyleSheet, Text, View } from 'react-native'; // Linking abre o link do PSG
+import { useSafeAreaInsets } from 'react-native-safe-area-context'; // mede as barras do sistema deste aparelho
 import { BarraArea } from '../components/BarraArea'; // uma linha do gráfico de percentuais
 import { Botao } from '../components/Botao'; // nosso botão
 import { CartaoCurso } from '../components/CartaoCurso'; // cartão de um curso com botões de site e WhatsApp
@@ -12,6 +13,7 @@ import { recomendarCursos } from '../logica/pontuacao'; // calcula percentuais e
 
 export default function TelaResultado() {
   const { respostas, filtros, reiniciar } = useTeste(); // dados guardados pelas telas anteriores
+  const insets = useSafeAreaInsets(); // insets.bottom = altura da barra de navegação deste celular
 
   // Uma chamada só faz todo o cálculo (ver logica/pontuacao.ts):
   // resultados = percentual de cada área | areas = 2 mais fortes | cursosPorArea = cursos já filtrados
@@ -24,7 +26,9 @@ export default function TelaResultado() {
   }
 
   return (
-    <ScrollView style={styles.tela} contentContainerStyle={styles.conteudo}>
+    // Esta tela é longa e sempre rola. O paddingBottom de 40 sozinho não bastava:
+    // em celular com barra de navegação, "Refazer o teste" ficava meio escondido.
+    <ScrollView style={styles.tela} contentContainerStyle={[styles.conteudo, { paddingBottom: insets.bottom + 40 }]}>
       <Stack.Screen options={{ title: 'Seu resultado' }} /* título do cabeçalho */ />
 
       {/* ---------- 1) PERFIL EM PERCENTUAIS ---------- */}
