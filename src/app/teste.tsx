@@ -1,5 +1,5 @@
 import { router } from 'expo-router'; // troca de tela
-import { useState } from 'react'; // estado local da tela
+import { useEffect, useRef, useState } from 'react'; // useRef = trava contra toques repetidos; useEffect = limpeza ao sair da tela
 import { ScrollView, StyleSheet, Text, View } from 'react-native'; // componentes básicos
 import { useSafeAreaInsets } from 'react-native-safe-area-context'; // mede as barras do sistema deste aparelho
 import { Botao } from '../components/Botao'; // nosso botão
@@ -12,6 +12,14 @@ export default function TelaTeste() {
   const { respostas, responder } = useTeste(); // respostas já dadas e função para gravar
   const [indice, setIndice] = useState(0); // posição da pergunta atual (0 = primeira)
   const insets = useSafeAreaInsets(); // insets.bottom = altura da barra de navegação deste celular
+  const travado = useRef(false); // true = já tem um avanço em andamento, ignora novos toques
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null); // guarda o setTimeout agendado para poder cancelar
+
+  useEffect(() => {
+    return () => { // esta função roda quando a tela é fechada
+      if (timer.current) clearTimeout(timer.current); // cancela um avanço pendente para não navegar depois de sair
+    };
+  }, []); // [] = configura só uma vez, quando a tela abre
 
   const pergunta = PERGUNTAS[indice]; // pergunta mostrada agora
   const notaAtual = respostas[pergunta.id]; // nota já dada nesta pergunta (ou undefined)
@@ -20,15 +28,26 @@ export default function TelaTeste() {
 
   function avancar() {
     if (ehUltima) router.push('/filtros'); // acabou: vai para o filtro de realidade
-    else setIndice((i) => i + 1); // senão: próxima pergunta
+    else setIndice((i) => Math.min(i + 1, PERGUNTAS.length - 1)); // próxima pergunta, sem nunca passar da última (segunda proteção)
   }
 
   function escolher(nota: number) {
+    if (travado.current) return; // já está avançando: ignora este toque
+    travado.current = true; // fecha a trava
     responder(pergunta.id, nota); // grava a nota no contexto
-    setTimeout(avancar, 250); // espera 1/4 de segundo para a pessoa ver a opção marcada e avança
+    timer.current = setTimeout(() => { // espera 1/4 de segundo para a pessoa ver a opção marcada
+      avancar(); // avança uma única vez
+      travado.current = false; // abre a trava para a próxima pergunta
+    }, 250);
+  }
+
+  function botaoAvancar() {
+    if (travado.current) return; // se o avanço automático já está agendado, não avança de novo
+    avancar(); // avanço manual pelo botão
   }
 
   function voltar() {
+    if (travado.current) return; // não deixa voltar no meio de um avanço automático
     if (indice === 0) router.back(); // na primeira pergunta, volta para a tela inicial
     else setIndice((i) => i - 1); // senão, volta uma pergunta
   }
@@ -67,7 +86,7 @@ export default function TelaTeste() {
       <View style={styles.rodape}>
         <Botao texto="Voltar" variante="contorno" onPress={voltar} />
         {notaAtual !== undefined && ( // "Avançar" só aparece se a pergunta já tem resposta
-          <Botao texto={ehUltima ? 'Concluir' : 'Avançar'} onPress={avancar} />
+          <Botao texto={ehUltima ? 'Concluir' : 'Avançar'} onPress={botaoAvancar} /* versão com trava */ />
         )}
       </View>
     </ScrollView>
