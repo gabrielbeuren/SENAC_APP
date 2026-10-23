@@ -36,7 +36,7 @@ export default function HomeScreen() {
             resizeMode="contain" // mostra o logo inteiro
             accessibilityLabel="Senac" // leitor de tela
           />
-          <Text style={styles.unidade}>Taquara · RS</Text>
+          <Text style={styles.unidade}>Senac RS</Text>{/* etiqueta ao lado do logo: antes era "Taquara · RS" */}
         </View>
 
         {/* ---------- RODAPÉ: nome, título, texto, etiquetas e botão ---------- */}

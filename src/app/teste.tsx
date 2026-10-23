@@ -15,10 +15,16 @@ export default function TelaTeste() {
   const travado = useRef(false); // true = já tem um avanço em andamento, ignora novos toques
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null); // guarda o setTimeout agendado para poder cancelar
 
+  // Cancela um avanço automático pendente e abre a trava.
+  // Assim a trava nunca fica "presa" fechada, e o Voltar sempre funciona.
+  function cancelarAvanco() {
+    if (timer.current) clearTimeout(timer.current); // desmarca o setTimeout agendado (se houver)
+    timer.current = null; // não há mais avanço pendente
+    travado.current = false; // abre a trava
+  }
+
   useEffect(() => {
-    return () => { // esta função roda quando a tela é fechada
-      if (timer.current) clearTimeout(timer.current); // cancela um avanço pendente para não navegar depois de sair
-    };
+    return cancelarAvanco; // roda quando a tela é fechada: não navega depois de sair
   }, []); // [] = configura só uma vez, quando a tela abre
 
   const pergunta = PERGUNTAS[indice]; // pergunta mostrada agora
@@ -36,18 +42,20 @@ export default function TelaTeste() {
     travado.current = true; // fecha a trava
     responder(pergunta.id, nota); // grava a nota no contexto
     timer.current = setTimeout(() => { // espera 1/4 de segundo para a pessoa ver a opção marcada
+      timer.current = null; // o avanço agendado já está acontecendo
+      travado.current = false; // abre a trava ANTES de navegar, para ela nunca ficar presa
       avancar(); // avança uma única vez
-      travado.current = false; // abre a trava para a próxima pergunta
     }, 250);
   }
 
   function botaoAvancar() {
+    if (notaAtual === undefined) return; // sem resposta nesta pergunta: não avança (proteção extra além do botão desabilitado)
     if (travado.current) return; // se o avanço automático já está agendado, não avança de novo
     avancar(); // avanço manual pelo botão
   }
 
   function voltar() {
-    if (travado.current) return; // não deixa voltar no meio de um avanço automático
+    cancelarAvanco(); // se tinha um avanço agendado, cancela: o Voltar tem prioridade e nunca fica bloqueado
     if (indice === 0) router.back(); // na primeira pergunta, volta para a tela inicial
     else setIndice((i) => i - 1); // senão, volta uma pergunta
   }
@@ -85,9 +93,11 @@ export default function TelaTeste() {
 
       <View style={styles.rodape}>
         <Botao texto="Voltar" variante="contorno" onPress={voltar} />
-        {notaAtual !== undefined && ( // "Avançar" só aparece se a pergunta já tem resposta
-          <Botao texto={ehUltima ? 'Concluir' : 'Avançar'} onPress={botaoAvancar} /* versão com trava */ />
-        )}
+        <Botao
+          texto={ehUltima ? 'Concluir' : 'Avançar'} // na última pergunta vira "Concluir"
+          onPress={botaoAvancar} // versão com trava
+          desabilitado={notaAtual === undefined} // fica sempre visível, mas apagado até a pessoa escolher uma opção
+        />
       </View>
     </ScrollView>
   );
