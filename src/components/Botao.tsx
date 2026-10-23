@@ -6,17 +6,21 @@ type Props = {
   texto: string; // texto escrito no botão
   onPress: () => void; // função chamada ao tocar
   variante?: 'principal' | 'contorno' | 'whatsapp'; // principal = azul cheio (padrão); contorno = só a borda; whatsapp = verde
+  desabilitado?: boolean; // true = botão aparece apagado e não responde ao toque (padrão: false)
 };
 
-export function Botao({ texto, onPress, variante = 'principal' }: Props) {
+export function Botao({ texto, onPress, variante = 'principal', desabilitado = false }: Props) {
   return (
     <Pressable
       onPress={onPress} // ação do toque
+      disabled={desabilitado} // quando true, o Pressable ignora o toque
       accessibilityRole="button" // leitores de tela anunciam como "botão"
+      accessibilityState={{ disabled: desabilitado }} // leitor de tela avisa que o botão está indisponível
       style={({ pressed }) => [
         styles.base, // estilo comum a todos os tipos
         styles[variante], // cor conforme a variante (o nome da variante é o nome do estilo)
         pressed && styles.pressionado, // fica mais transparente enquanto o dedo está em cima
+        desabilitado && styles.desabilitado, // fica apagado quando desabilitado
       ]}
     >
       <Text style={styles.texto}>{texto}</Text>
@@ -35,5 +39,6 @@ const styles = StyleSheet.create({
   contorno: { borderWidth: 1.5, borderColor: CORES.borda }, // só a borda, fundo transparente
   whatsapp: { backgroundColor: CORES.whatsapp }, // verde do WhatsApp
   pressionado: { opacity: 0.8 }, // efeito visual do toque
+  desabilitado: { opacity: 0.4 }, // bem apagado: mostra que ainda não dá para tocar
   texto: { color: CORES.texto, fontSize: 16, fontWeight: 'bold' }, // texto branco em negrito
 });
