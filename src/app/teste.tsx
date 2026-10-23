@@ -1,6 +1,6 @@
-import { router } from 'expo-router'; // troca de tela
-import { useEffect, useRef, useState } from 'react'; // useRef = trava contra toques repetidos; useEffect = limpeza ao sair da tela
-import { ScrollView, StyleSheet, Text, View } from 'react-native'; // componentes básicos
+import { router, Stack, useFocusEffect } from 'expo-router'; // troca de tela; Stack.Screen muda o cabeçalho; useFocusEffect roda código só enquanto esta tela está visível
+import { useCallback, useEffect, useRef, useState } from 'react'; // useRef = trava contra toques repetidos; useEffect = limpeza ao sair da tela
+import { BackHandler, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'; // componentes básicos; BackHandler = botão/gesto voltar do Android
 import { useSafeAreaInsets } from 'react-native-safe-area-context'; // mede as barras do sistema deste aparelho
 import { Botao } from '../components/Botao'; // nosso botão
 import { Opcao } from '../components/Opcao'; // opção marcável
@@ -60,11 +60,40 @@ export default function TelaTeste() {
     else setIndice((i) => i - 1); // senão, volta uma pergunta
   }
 
+  // Botão/gesto "voltar" do Android: em vez de fechar a tela inteira, volta uma pergunta.
+  // useFocusEffect liga isso só enquanto ESTA tela está aparecendo; quando a pessoa vai para
+  // os filtros, o "desligar" roda e o voltar do Android volta a funcionar normal lá.
+  useFocusEffect(
+    useCallback(() => {
+      const assinatura = BackHandler.addEventListener('hardwareBackPress', () => {
+        voltar(); // mesma ação do botão Voltar de baixo
+        return true; // true = "já tratei", o Android não fecha a tela sozinho
+      });
+      return () => assinatura.remove(); // desliga ao sair da tela
+    }, [indice]), // refaz quando muda a pergunta, para usar o índice atualizado
+  );
+
   // ---------- TELA DA PERGUNTA ----------
   return (
     // paddingBottom somado ao inset: numa pergunta longa o conteúdo rola, e sem isso
     // os botões Voltar/Avançar terminam atrás da barra de navegação do Android.
     <ScrollView style={styles.tela} contentContainerStyle={[styles.conteudo, { paddingBottom: insets.bottom + 24 }]}>
+      {/* Troca a seta ← do topo por uma nossa, que volta UMA pergunta (a seta padrão fechava o teste inteiro) */}
+      <Stack.Screen
+        options={{
+          headerLeft: () => (
+            <Pressable
+              onPress={voltar} // mesma ação do botão Voltar de baixo
+              hitSlop={12} // aumenta a área de toque em volta da seta
+              accessibilityRole="button" // leitor de tela anuncia como botão
+              accessibilityLabel="Voltar" // o que o leitor de tela fala
+              style={styles.setaBotao} // espaço entre a seta e o título
+            >
+              <Text style={styles.seta}>←</Text>
+            </Pressable>
+          ),
+        }}
+      />
       <View style={styles.progressoBloco}>
         <Text style={styles.progressoTexto}>
           Pergunta {indice + 1} de {PERGUNTAS.length}
@@ -113,4 +142,6 @@ const styles = StyleSheet.create({
   pergunta: { fontSize: 23, fontWeight: 'bold', color: CORES.texto, lineHeight: 31 }, // texto da pergunta
   opcoes: { gap: 10 }, // espaço entre as opções
   rodape: { flexDirection: 'row', justifyContent: 'space-between', gap: 12 }, // botões Voltar e Avançar
+  setaBotao: { paddingRight: 16 }, // afasta a seta do título "Teste vocacional"
+  seta: { fontSize: 24, color: CORES.texto }, // seta branca, do tamanho da seta padrão
 });
