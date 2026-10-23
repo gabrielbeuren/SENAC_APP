@@ -19,7 +19,14 @@ export default function RootLayout() {
         }}
       >
         <Stack.Screen name="index" options={{ headerShown: false }} /* tela inicial ocupa a tela toda */ />
-        <Stack.Screen name="teste" options={{ title: 'Teste vocacional' }} /* tela das perguntas */ />
+        <Stack.Screen
+          name="teste" // tela das perguntas
+          options={{
+            title: 'Teste vocacional', // título do cabeçalho
+            headerBackVisible: false, // sem seta ← no topo: nas perguntas, o Voltar fica só embaixo
+            gestureEnabled: false, // no iPhone, impede o gesto de arrastar da borda, que fecharia o teste inteiro
+          }}
+        />
       </Stack>
     </TesteProvider>
   );
